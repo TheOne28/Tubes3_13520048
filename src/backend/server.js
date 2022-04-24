@@ -20,6 +20,14 @@ connection.once('open', () => {
 app.use(cors());
 app.use(express.json());
 
+const hasilRouter = require('./routes/hasilPrediksi');
+const penyakitRouter = require('./routes/penyakit');
+const prediksiRouter = require('./routes/prediksi');
+
+app.use('/hasil', hasilRouter);
+app.use('/penyakit', penyakitRouter);
+app.use('/prediksi', prediksiRouter);
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port} `);
 });
