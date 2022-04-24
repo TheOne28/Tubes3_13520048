@@ -23,6 +23,6 @@ const prediksiSchema = new Schema({
     timestamps: true,
 });
 
-const Prediksi = mongoose.model('Exercise', prediksiSchema);
+const Prediksi = mongoose.model('Prediksi', prediksiSchema);
 
 module.exports = Prediksi;
