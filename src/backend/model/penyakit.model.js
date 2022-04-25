@@ -16,6 +16,7 @@ const penyakitSchema = new Schema({
     timestamps: true,
 });
 
+
 const Penyakit = mongoose.model('Penyakit', penyakitSchema);
 
 module.exports = Penyakit;

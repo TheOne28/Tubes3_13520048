@@ -1,4 +1,6 @@
 const router = require('express').Router();
-let Prediksi = require('../model/prediksi.model');
+const Prediksi = require('../model/prediksi.model');
+
+router.route('/')
 
 module.exports = router;

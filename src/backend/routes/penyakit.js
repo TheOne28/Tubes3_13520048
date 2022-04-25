@@ -13,11 +13,13 @@ router.route('/add').post((req, res) => {
         });
 
         newPenyakit.save().then((r) => {
-            res.json('Penyakit added')
+            res.json('Penyakit added').status(200)
         }).catch((err) => {
             res.status(400).json('Error: ' + err);
         });
     }
+
+    res.json('DNA Tidak valid').status(400);
 });
 
 module.exports = router;
