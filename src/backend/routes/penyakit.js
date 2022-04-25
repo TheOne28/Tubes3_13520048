@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const dnaMatching = require('../algo/regex');
+const {dnaMatching} = require('../algo/regex');
 const Penyakit = require('../model/penyakit.model.js');
 
 router.route('/add').post((req, res) => {
