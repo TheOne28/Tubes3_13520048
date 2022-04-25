@@ -7,7 +7,7 @@ router.route('/add').post((req, res) =>{
     const penyakitPrediksi =  req.body.penyakitPrediksi;
     const dnaInput = req.body.dnaInput;
     
-    const dnaPenyakit = Penyakit.find({'penyakit' : penyakitPrediksi});
+    const dnaPenyakit = Penyakit.find({'penyakitPrediksi' : penyakitPrediksi});
 
     //Masih bingung find kalau gak nemu returnnya apa
     if(typeof dnaPenyakit === 'undefined'){
