@@ -10,7 +10,7 @@ router.route('/add').post((req, res) =>{
     const dnaPenyakit = Penyakit.find({'penyakitPrediksi' : penyakitPrediksi});
 
     //Masih bingung find kalau gak nemu returnnya apa
-    if(typeof dnaPenyakit === 'undefined'){
+    if(dnaPenyakit === null){
         res.json("Penyakit belum terdaftar").status(400);
         return;
     }

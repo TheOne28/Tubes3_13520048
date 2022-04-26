@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
+const Double = mongoose.Schema.Types.Decimal128;
 
 const prediksiSchema = new Schema({
     tanggalPrediksi: {
@@ -18,6 +19,11 @@ const prediksiSchema = new Schema({
     status: {
         type: String,
         required : true
+    },
+    tingkatKemiripan: {
+        type: Double,
+        required: true
+
     }
 },{
     timestamps: true,
