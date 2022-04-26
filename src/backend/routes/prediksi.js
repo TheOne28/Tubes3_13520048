@@ -4,18 +4,23 @@ const kmp = require('../algo/kmp');
 const boyermoore = require('../algo/boyermoore');
 const Penyakit = require('../model/penyakit.model');
 const Prediksi = require('../model/prediksi.model');
+const fileParser = require('../algo/fileParser');
+const {dnaMatching} = require('../algo/regex');
+
 
 router.route('/add').post((req, res) =>{
     const namaPasien = req.body.namaPasien;
     const penyakitPrediksi =  req.body.penyakitPrediksi;
-    const dnaInput = req.body.dnaInput;
+    const dnaInputPath = req.body.dnaInputPath;
+    const dnaInput = fileParser(dnaInputPath)[0];   // file path masih belum tau lengkapnya
     const selectedAlgo = req.body.selectedAlgo;
     
+    if (dnaMatching(dnaInput)){
+        res.json('DNA input tidak valid').status(400);
+    }
     Penyakit.find({penyakit : penyakitPrediksi}).then((r) => {
         if(r.length == 0){
             res.json('Penyakit tidak ditemukan');
-        }else if(dnaInput.length<r[0].dnaString.length){
-            res.json('Dna input kurang dari dna pattern');
         }else{
             if(selectedAlgo == 'boyermoore'){
                 var result = boyermoore(dnaInput,r[0].dnaString);
