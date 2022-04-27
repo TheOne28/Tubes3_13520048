@@ -65,16 +65,11 @@ export default class CreatePenyakit extends Component {
                     </div>
                     <div className="form-group">
                         <label>Sequence DNA:</label>
-                        <input type="text"
+                        <input type="file" 
                             required
                             className="form-control"
                             value={this.state.txtpath}
-                            onChange={this.onChangetxtPath}
-                            />
-                    </div>
-                    <div className="form-group files">
-                        <label>Upload txt file</label>
-                        <input type="file" className="form-control"/>
+                            onChange={this.onChangetxtPath}/>
                     </div>
                     <br/>
                     <div className="form-group">
