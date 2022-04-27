@@ -19,17 +19,19 @@ export default class TesDNA extends Component {
             jenistes: [],
             selectedFile: '',
             selectedFileContent: '',
+            sudahdicari: 0,
             hasil_date: '',
             hasil_username: '',
             hasil_penyakit: '',
             hasil_similarity: '',
-            hasil_tnf: ''
+            hasil_tnf: '',
+            pesan_gagal: ''
         }
     }
 
     componentDidMount() {
         this.setState({
-            jenistes: ['KMP', 'Bayer-Moore']
+            jenistes: ['KMP', 'Boyer-Moore']
         })
     }
 
@@ -75,22 +77,37 @@ export default class TesDNA extends Component {
     onSubmit(e){
         e.preventDefault();
 
+        this.setState({
+            pesan_gagal: ''
+        })
+
         const newTesDNA = {
             namaPasien: this.state.username,
             dnaInput: this.state.selectedFileContent,
             penyakitPrediksi: this.state.prediksipenyakit,
             selectedAlgo: this.state.pilihantes
         }
+
+        this.setState({
+            sudahdicari: 1
+        })
+
         axios.post('http://localhost:3001/prediksi/add', newTesDNA)
-        .then(res => 
-            this.setState({
-                hasil_date: res.data.tanggalPrediksi,
-                hasil_username: this.state.username,
-                hasil_penyakit: this.state.prediksipenyakit,
-                hasil_similarity: res.data.tingkatKemiripan,
-                hasil_tnf: res.data.status
-            })
-        );
+        .then(res => {
+            if(typeof res.data == "string"){
+                this.setState({
+                    pesan_gagal: res.data
+                })
+            }else{
+                this.setState({
+                    hasil_date: res.data.tanggalPrediksi,
+                    hasil_username: this.state.username,
+                    hasil_penyakit: res.data.penyakitPrediksi,
+                    hasil_similarity: res.data.tingkatKemiripan,
+                    hasil_tnf: res.data.status
+                })
+            }
+        });
         console.log(this.state.hasil_similarity);
         console.log(newTesDNA);
 
@@ -153,13 +170,23 @@ export default class TesDNA extends Component {
                     </div>
                 </form>
                 <br/>
-                <h3>Hasil Tes</h3>
-                <p>Tanggal    : {this.state.hasil_date}</p>
-                <p>Pengguna   : {this.state.hasil_username}</p>
-                <p>Penyakit   : {this.state.hasil_penyakit}</p>
-                <p>Similarity : {this.state.hasil_similarity}</p>
-                <p>True/False : {this.state.hasil_tnf}</p>
-                
+                {this.state.sudahdicari > 0 &&
+                <>
+                    {this.state.pesan_gagal.length > 0 &&
+                        <h3>DNA tidak valid</h3>
+                    }
+                    {this.state.pesan_gagal.length < 1 &&
+                        <>
+                            <h3>Hasil Tes</h3>
+                            <p>Tanggal    : {this.state.hasil_date}</p>
+                            <p>Pengguna   : {this.state.hasil_username}</p>
+                            <p>Penyakit   : {this.state.hasil_penyakit}</p>
+                            <p>Similarity : {this.state.hasil_similarity}</p>
+                            <p>True/False : {this.state.hasil_tnf}</p>
+                        </>
+                    }
+                </>
+                }
             </div>
         );
     }

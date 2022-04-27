@@ -52,10 +52,6 @@ export default class CreatePenyakit extends Component {
             })
         );
 
-        // this.setState({
-        //     hasil: 'Penyakit berhasil ditambahkan.'
-        // })
-
         console.log(newPenyakit);
 
         //window.location = '/';

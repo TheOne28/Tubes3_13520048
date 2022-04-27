@@ -3,7 +3,7 @@ const {dnaMatching} = require('../algo/regex');
 const Penyakit = require('../model/penyakit.model.js');
 
 router.route('/add').post((req, res) => {
-    const penyakit = req.body.penyakit;
+    const penyakit = req.body.penyakit.charAt(0).toUpperCase() + req.body.penyakit.slice(1).toLowerCase();
     const dnaString = req.body.dnaString;
 
     if (dnaString.length == 0) {

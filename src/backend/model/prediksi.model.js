@@ -5,8 +5,8 @@ const Double = mongoose.Schema.Types.Decimal128;
 
 const prediksiSchema = new Schema({
     tanggalPrediksi: {
-        type: Date,
-        default: Date.now,
+        type: String,
+        required: true
     },
     namaPasien: {
         type: String,

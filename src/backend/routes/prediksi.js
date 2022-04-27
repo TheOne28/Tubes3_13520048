@@ -9,7 +9,7 @@ const {dnaMatching} = require('../algo/regex');
 
 router.route('/add').post((req, res) =>{
     const namaPasien = req.body.namaPasien;
-    const penyakitPrediksi =  req.body.penyakitPrediksi;
+    const penyakitPrediksi =  req.body.penyakitPrediksi.charAt(0).toUpperCase() + req.body.penyakitPrediksi.slice(1).toLowerCase();
     const dnaInput = req.body.dnaInput;
     const selectedAlgo = req.body.selectedAlgo;
     
@@ -22,20 +22,20 @@ router.route('/add').post((req, res) =>{
             res.json('Penyakit tidak ditemukan').status(400);
             return;
         }else{
-            if(selectedAlgo == 'Bayer-Moore'){
+            if(selectedAlgo == 'Boyer-Moore'){
                 var result = boyermoore(dnaInput,r[0].dnaString);
             }else if (selectedAlgo == 'KMP'){
                 var result = kmp(dnaInput,r[0].dnaString);
             }
-            
+
             if(result){
-                var seratus = 100;
                 console.log('masok');
                 const newPrediksi = new Prediksi({
                     namaPasien: namaPasien,
                     penyakitPrediksi: penyakitPrediksi,
                     status: 'True',
-                    tingkatKemiripan: seratus.toString()
+                    tingkatKemiripan: "100%",
+                    tanggalPrediksi: new Date().toISOString().slice(0,10)
                 });
                 newPrediksi.save()
                     .then(() => res.json(newPrediksi).status(200))
@@ -45,7 +45,8 @@ router.route('/add').post((req, res) =>{
                     namaPasien: namaPasien,
                     penyakitPrediksi: penyakitPrediksi,
                     status: 'True',
-                    tingkatKemiripan: lcs(dnaInput,r[0].dnaString).toString()
+                    tingkatKemiripan: lcs(dnaInput,r[0].dnaString).toString() + '%',
+                    tanggalPrediksi: new Date().toISOString().slice(0,10)
                 });
                 newPrediksi.save()
                     .then(() => res.json(newPrediksi).status(200))
@@ -56,7 +57,8 @@ router.route('/add').post((req, res) =>{
                     namaPasien: namaPasien,
                     penyakitPrediksi: penyakitPrediksi,
                     status: 'False',
-                    tingkatKemiripan: lcs(dnaInput,r[0].dnaString).toString(),
+                    tingkatKemiripan: lcs(dnaInput,r[0].dnaString).toString() + '%',
+                    tanggalPrediksi: new Date().toISOString().slice(0,10)
                 });
                 newPrediksi.save()
                     .then(() => res.json(newPrediksi).status(200))
