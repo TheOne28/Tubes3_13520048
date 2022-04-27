@@ -27,12 +27,6 @@ router.route('/add').post((req, res) =>{
             }else if (selectedAlgo == 'KMP'){
                 var result = kmp(dnaInput,r[0].dnaString);
             }
-            if (result){
-                console.log('true');
-            }
-            else{
-                console.log('false');
-            }
             
             if(result){
                 var seratus = 100;

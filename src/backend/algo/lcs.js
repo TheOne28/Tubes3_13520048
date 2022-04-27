@@ -1,23 +1,31 @@
-function lcs(a, b) {
-    var c = [];
-    for (var i = 0; i <= a.length; i++) {
-        c[i] = [];
-        c[i][0] = 0;
+/**
+ * Function untuk menghitung lcs dari string a dan b
+ * @param {String} a  
+ * @param {String} b 
+ * @returns float yang menyatakan tingkat kemiripan
+ */
+module.exports = function lcs(a, b) {
+    var aLength = a.length;
+    var bLength = b.length;
+
+    var dp = new Array(aLength + 1);
+
+    for (let i = 0; i <= aLength + 1; i++) {
+        dp[i] = new Array(bLength + 1);
     }
-    for (var j = 0; j <= b.length; j++) {
-        c[0][j] = 0;
-    }
-    for (i = 1; i <= a.length; i++) {
-        for (j = 1; j <= b.length; j++) {
-        if (a.charAt(i - 1) == b.charAt(j - 1)) {
-            c[i][j] = c[i - 1][j - 1] + 1;
-        } else {
-            c[i][j] = Math.max(c[i - 1][j], c[i][j - 1]);
+
+    for (let i = 0; i <= aLength; i++) {
+        for(let j = 0; j <= bLength; j++){
+            if(i == 0 || j == 0){
+                dp[i][j] = 0;
+            }else if(a[i - 1] == b[i-1]){
+                dp[i][j] = dp[i-1][j-1] + 1;
+            }else{
+                dp[i][j] = Math.max(dp[i -1][j], dp[i][j-1]);
+            }
         }
-        }
     }
-    return c;
-    // return (c[c.length-1][c[0].length-1]/Math.min(a.length,b.length))*100;    // returns in percentage (without '%')
+
+    return (dp[aLength][bLength] / Math.min(aLength, bLength)) * 100;
 }
 
-console.log(lcs('ACC', 'ACGTACGACTAGCACGTACGACTAGCACGTACGACTAGCACGTACGACTAGCACGTACGACTAGCACGTACGACTAGC'))
