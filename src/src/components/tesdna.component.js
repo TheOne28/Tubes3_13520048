@@ -7,13 +7,29 @@ export default class TesDNA extends Component {
         this.onChangeUserName = this.onChangeUserName.bind(this);
         this.onChangetxtPath = this.onChangetxtPath.bind(this);
         this.onChangePrediksiPenyakit = this.onChangePrediksiPenyakit.bind(this);
+        this.onChangePilihanTes = this.onChangePilihanTes.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+
+        this.userInput = React.createRef();
 
         this.state = {
             username: '',
             txtpath: '',
-            prediksipenyakit: ''
+            prediksipenyakit: '',
+            pilihantes: 'KMP',
+            jenistes: [],
+            hasil_date: '',
+            hasil_username: '',
+            hasil_penyakit: '',
+            hasil_similarity: '',
+            hasil_tnf: ''
         }
+    }
+
+    componentDidMount() {
+        this.setState({
+            jenistes: ['KMP', 'Bayer-Moore']
+        })
     }
 
     onChangeUserName(e){
@@ -34,16 +50,33 @@ export default class TesDNA extends Component {
         })
     }
 
+    onChangePilihanTes(e){
+        this.setState({
+            pilihantes: e.target.value
+        })
+    }
+
     onSubmit(e){
         e.preventDefault();
 
         const newTesDNA = {
             username: this.state.username,
             txtpath: this.state.txtpath,
-            prediksipenyakit: this.state.prediksipenyakit
+            prediksipenyakit: this.state.prediksipenyakit,
+            pilihantes: this.state.pilihantes
         }
 
+        this.setState({
+            hasil_date: 1,
+            hasil_username: this.state.username,
+            hasil_penyakit: this.state.prediksipenyakit,
+            hasil_similarity: 100,
+            hasil_tnf: 'True'
+        })
+
         console.log(newTesDNA);
+
+        //window.location = '/';
 
     }
     
@@ -71,7 +104,7 @@ export default class TesDNA extends Component {
                             />
                     </div>
                     <div className="form-group">
-                        <label>Prediksi Penyakit</label>
+                        <label>Prediksi Penyakit:</label>
                         <input type="text"
                             required
                             className="form-control"
@@ -80,9 +113,37 @@ export default class TesDNA extends Component {
                             />
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Tes DNA" className="btn btn-primary"/>
+                        <label>Pilihan Jenis Tes:</label>
+                        <select ref={this.userInput}
+                            required
+                            className="form-control"
+                            value={this.state.pilihantes}
+                            onChange={this.onChangePilihanTes}>
+                            {
+                                this.state.jenistes.map(function(user){
+                                    return <option
+                                        key={user}
+                                        value={user}>
+                                        {user}
+                                        </option>
+                                }
+                                )
+                            }
+                        </select>
+                    </div>
+                    <br/>
+                    <div className="form-group">
+                        <input type="submit" value="Submit" className="btn btn-primary"/>
                     </div>
                 </form>
+                <br/>
+                <h3>Hasil Tes</h3>
+                <p>Tanggal    : {this.state.hasil_date}</p>
+                <p>Pengguna   : {this.state.hasil_username}</p>
+                <p>Penyakit   : {this.state.hasil_penyakit}</p>
+                <p>Similarity : {this.state.hasil_similarity}</p>
+                <p>True/False : {this.state.hasil_tnf}</p>
+                
             </div>
         );
     }

@@ -8,7 +8,8 @@ export default class CheckDataTes extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            checkquery: ''
+            checkquery: '',
+            hasil: []
         }
     }
 
@@ -27,6 +28,8 @@ export default class CheckDataTes extends Component {
 
         console.log(newCheckQuery);
 
+        window.location = '/';
+
     }
     
     render() {
@@ -43,8 +46,9 @@ export default class CheckDataTes extends Component {
                             onChange={this.onChangeNamaCheckQuery}
                             />
                     </div>
+                    <br/>
                     <div className="form-group">
-                        <input type="submit" value="Check Data Tes" className="btn btn-primary"/>
+                        <input type="submit" value="Submit" className="btn btn-primary"/>
                     </div>
                 </form>
             </div>

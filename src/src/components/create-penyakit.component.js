@@ -10,7 +10,8 @@ export default class CreatePenyakit extends Component {
 
         this.state = {
             namapenyakit: '',
-            txtpath: ''
+            txtpath: '',
+            hasil: ''
         }
     }
 
@@ -34,7 +35,13 @@ export default class CreatePenyakit extends Component {
             txtpath: this.state.txtpath
         }
 
+        this.setState({
+            hasil: 'Penyakit berhasil ditambahkan.'
+        })
+
         console.log(newPenyakit);
+
+        //window.location = '/';
 
     }
     
@@ -61,10 +68,17 @@ export default class CreatePenyakit extends Component {
                             onChange={this.onChangetxtPath}
                             />
                     </div>
+                    <div className="form-group files">
+                        <label>Upload txt file</label>
+                        <input type="file" className="form-control"/>
+                    </div>
+                    <br/>
                     <div className="form-group">
-                        <input type="submit" value="Create Penyakit" className="btn btn-primary"/>
+                        <input type="submit" value="Submit" className="btn btn-primary"/>
                     </div>
                 </form>
+                <br/>
+                <h2>{this.state.hasil}</h2>
             </div>
         );
     }
