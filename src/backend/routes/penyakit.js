@@ -5,8 +5,8 @@ const Penyakit = require('../model/penyakit.model.js');
 
 router.route('/add').post((req, res) => {
     const penyakit = req.body.penyakit;
-    const dnaStringPath = req.body.dnaStringPath;
-    const dnaString = fileParser(dnaStringPath)[0];  // file path masih belum tau lengkapnya
+    const dnaString = req.body.dnaString;
+    // const dnaString = fileParser(dnaStringPath)[0];  // file path masih belum tau lengkapnya
 
     if(!dnaMatching(dnaString)){
         const newPenyakit = new Penyakit({
@@ -19,6 +19,7 @@ router.route('/add').post((req, res) => {
         }).catch((err) => {
             res.status(400).json('Error: ' + err);
         });
+        return;
     }
 
     res.json('DNA Tidak valid').status(400);
