@@ -6,13 +6,13 @@ export default class CreatePenyakit extends Component {
         super(props);
 
         this.onChangeNamaPenyakit = this.onChangeNamaPenyakit.bind(this);
-        this.onChangetxtPath = this.onChangetxtPath.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             namapenyakit: '',
-            txtpath: '',
-            hasil: ''
+            selectedFile: '',
+            selectedFileContent: '',
+            hasil: '',
         }
     }
 
@@ -22,10 +22,19 @@ export default class CreatePenyakit extends Component {
         })
     }
 
-    onChangetxtPath(e){
-        this.setState({
-            txtpath: e.target.value
-        })
+    handleFileChange = e => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = () => {
+            this.setState({
+                selectedFile: file.name,
+                selectedFileContent: reader.result
+            })
+        }
+        reader.onerror = () => {
+            console.log('file error', reader.error)
+        }
     }
 
     onSubmit(e){
@@ -33,18 +42,22 @@ export default class CreatePenyakit extends Component {
 
         const newPenyakit = {
             penyakit: this.state.namapenyakit,
-            dnaString: this.state.txtpath
+            dnaString: this.state.selectedFileContent,
         }
+        
+        axios.post('http://localhost:3001/penyakit/add', newPenyakit)
+        .then(res => 
+            this.setState({
+                hasil: res.data
+            })
+        );
 
-        this.setState({
-            hasil: 'Penyakit berhasil ditambahkan.'
-        })
+        // this.setState({
+        //     hasil: 'Penyakit berhasil ditambahkan.'
+        // })
 
         console.log(newPenyakit);
 
-        
-        axios.post('http://localhost:3001/penyakit/add', newPenyakit)
-        .then(res => console.log(res.data));
         //window.location = '/';
 
     }
@@ -68,8 +81,8 @@ export default class CreatePenyakit extends Component {
                         <input type="file" 
                             required
                             className="form-control"
-                            value={this.state.txtpath}
-                            onChange={this.onChangetxtPath}/>
+                            onChange={this.handleFileChange}/>
+                            {/* // value={this.state.selectedFile}/> */}
                     </div>
                     <br/>
                     <div className="form-group">

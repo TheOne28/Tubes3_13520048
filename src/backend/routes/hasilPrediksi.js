@@ -11,6 +11,7 @@ router.route('/').get((req, res) =>{
     
     if(tanggalPrediksi === null && penyakitPrediksi === null){
         res.json('Query input tidak valid').status(400);
+        return;
     }
     
     var allPrediksi;

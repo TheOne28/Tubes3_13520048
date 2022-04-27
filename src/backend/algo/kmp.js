@@ -30,7 +30,7 @@ module.exports = function kmp(text, pattern) {
     while (i < n) {
         if (pattern[j] == text[i]) {
             if (j == m - 1) {
-                return i - m + 1;
+                return true;
             }
             i++;
             j++;
@@ -42,5 +42,5 @@ module.exports = function kmp(text, pattern) {
             i++;
         }
     }
-    return -1;
+    return false;
 }

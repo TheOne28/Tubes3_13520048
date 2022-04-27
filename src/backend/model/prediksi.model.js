@@ -21,13 +21,14 @@ const prediksiSchema = new Schema({
         required : true
     },
     tingkatKemiripan: {
-        type: Double,
+        type: String,
         required: true
 
     }
 },{
     timestamps: true,
 });
+
 
 const Prediksi = mongoose.model('Prediksi', prediksiSchema);
 

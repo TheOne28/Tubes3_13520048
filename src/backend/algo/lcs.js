@@ -1,4 +1,4 @@
-module.exports = function lcs(a, b) {
+function lcs(a, b) {
     var c = [];
     for (var i = 0; i <= a.length; i++) {
         c[i] = [];
@@ -16,5 +16,8 @@ module.exports = function lcs(a, b) {
         }
         }
     }
-    return c[c.length-1][c[0].length-1]/Math.min(a.length,b.length)*100;    // returns in percentage (without '%')
+    return c;
+    // return (c[c.length-1][c[0].length-1]/Math.min(a.length,b.length))*100;    // returns in percentage (without '%')
 }
+
+console.log(lcs('ACC', 'ACGTACGACTAGCACGTACGACTAGCACGTACGACTAGCACGTACGACTAGCACGTACGACTAGCACGTACGACTAGC'))

@@ -26,7 +26,7 @@ module.exports = function bm(text,pattern) {
     do {
         if (pattern[j] == text[i]) {
             if (j == 0) {
-                return i;
+                return true;
             }
             i--;
             j--;
@@ -36,5 +36,5 @@ module.exports = function bm(text,pattern) {
             j = m-1;
         }
     } while (i <= n-1);
-    return -1;
+    return false;
 }

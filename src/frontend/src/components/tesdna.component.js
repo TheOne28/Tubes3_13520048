@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class TesDNA extends Component {
     constructor(props) {
         super(props);
 
         this.onChangeUserName = this.onChangeUserName.bind(this);
-        this.onChangetxtPath = this.onChangetxtPath.bind(this);
         this.onChangePrediksiPenyakit = this.onChangePrediksiPenyakit.bind(this);
         this.onChangePilihanTes = this.onChangePilihanTes.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -14,10 +14,11 @@ export default class TesDNA extends Component {
 
         this.state = {
             username: '',
-            txtpath: '',
             prediksipenyakit: '',
             pilihantes: 'KMP',
             jenistes: [],
+            selectedFile: '',
+            selectedFileContent: '',
             hasil_date: '',
             hasil_username: '',
             hasil_penyakit: '',
@@ -38,9 +39,9 @@ export default class TesDNA extends Component {
         })
     }
 
-    onChangetxtPath(e){
+    onChangeFile(e){
         this.setState({
-            txtpath: e.target.value
+            selectedFile: e.target.value
         })
     }
 
@@ -56,24 +57,41 @@ export default class TesDNA extends Component {
         })
     }
 
+    handleFileChange = e => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = () => {
+            this.setState({
+                selectedFile: file.name,
+                selectedFileContent: reader.result
+            })
+        }
+        reader.onerror = () => {
+            console.log('file error', reader.error)
+        }
+    }
+
     onSubmit(e){
         e.preventDefault();
 
         const newTesDNA = {
-            username: this.state.username,
-            txtpath: this.state.txtpath,
-            prediksipenyakit: this.state.prediksipenyakit,
-            pilihantes: this.state.pilihantes
+            namaPasien: this.state.username,
+            dnaInput: this.state.selectedFileContent,
+            penyakitPrediksi: this.state.prediksipenyakit,
+            selectedAlgo: this.state.pilihantes
         }
-
-        this.setState({
-            hasil_date: 1,
-            hasil_username: this.state.username,
-            hasil_penyakit: this.state.prediksipenyakit,
-            hasil_similarity: 100,
-            hasil_tnf: 'True'
-        })
-
+        axios.post('http://localhost:3001/prediksi/add', newTesDNA)
+        .then(res => 
+            this.setState({
+                hasil_date: res.data.tanggalPrediksi,
+                hasil_username: this.state.username,
+                hasil_penyakit: this.state.prediksipenyakit,
+                hasil_similarity: res.data.tingkatKemiripan,
+                hasil_tnf: res.data.status
+            })
+        );
+        console.log(this.state.hasil_similarity);
         console.log(newTesDNA);
 
         //window.location = '/';
@@ -96,12 +114,10 @@ export default class TesDNA extends Component {
                     </div>
                     <div className="form-group">
                         <label>Sequence DNA:</label>
-                        <input type="text"
+                        <input type="file" 
                             required
                             className="form-control"
-                            value={this.state.txtpath}
-                            onChange={this.onChangetxtPath}
-                            />
+                            onChange={this.handleFileChange}/>
                     </div>
                     <div className="form-group">
                         <label>Prediksi Penyakit:</label>
