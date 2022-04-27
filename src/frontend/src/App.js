@@ -24,7 +24,6 @@ function App() {
       </Routes>
       </div>
     </Router>
-    //<h1>Wanjing</h1>
   );
 }
 

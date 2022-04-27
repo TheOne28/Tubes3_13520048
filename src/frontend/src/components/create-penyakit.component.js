@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class CreatePenyakit extends Component {
     constructor(props) {
@@ -31,8 +32,8 @@ export default class CreatePenyakit extends Component {
         e.preventDefault();
 
         const newPenyakit = {
-            namapenyakit: this.state.namapenyakit,
-            txtpath: this.state.txtpath
+            penyakit: this.state.namapenyakit,
+            dnaString: this.state.txtpath
         }
 
         this.setState({
@@ -41,6 +42,9 @@ export default class CreatePenyakit extends Component {
 
         console.log(newPenyakit);
 
+        
+        axios.post('http://localhost:3001/penyakit/add', newPenyakit)
+        .then(res => console.log(res.data));
         //window.location = '/';
 
     }
