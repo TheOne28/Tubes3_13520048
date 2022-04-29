@@ -27,10 +27,21 @@ Program ini digunakan untuk mencari sebuah pattern (DNA Penyakit) dari suatu tek
 
 ## Requirements
 1. Koneksi Internet
+2. npm
+3. node.js
+4. dependency yang akan di install dengan `npm install`
 
 ## How to Run
+1. Menjalankan online
 - Buka laman https://rejeimpekandfriends.herokuapp.com/ yang merupakan hasil deploy dari repository ini
 - Pilih menu sesuai yang diinginkan
+2. Menjalankan secara lokal
+- Masuk ke folder src/backend
+- jalankan command `npm install` untuk menginstall segala dependency untuk backend
+- jalankan command `npm start` untuk menjalankan backend pada localhost:3001
+- Pindah ke folder src/frontend
+- jalankan command `npm install` untuk menginstall segala dependency untuk frontend
+- jalankan command `npm start` untuk menjalankan frontend pada localhost:3000
 
 ## Project Status
 Project is: _complete_
