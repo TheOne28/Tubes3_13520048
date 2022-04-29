@@ -37,11 +37,12 @@ Program ini digunakan untuk mencari sebuah pattern (DNA Penyakit) dari suatu tek
 - Pilih menu sesuai yang diinginkan
 2. Menjalankan secara lokal
 - Masuk ke folder src/backend
-- jalankan command `npm install` untuk menginstall segala dependency untuk backend
-- jalankan command `npm start` untuk menjalankan backend pada localhost:3001
+- Jalankan command `npm install` untuk menginstall segala dependency untuk backend
+- Jalankan command `npm start` untuk menjalankan backend pada localhost:3001
 - Pindah ke folder src/frontend
-- jalankan command `npm install` untuk menginstall segala dependency untuk frontend
-- jalankan command `npm start` untuk menjalankan frontend pada localhost:3000
+- Jalankan command `npm install` untuk menginstall segala dependency untuk frontend
+- Jalankan command `npm start` untuk menjalankan frontend pada localhost:3000
+- Buka localhost:3000 pada browser
 
 ## Project Status
 Project is: _complete_
