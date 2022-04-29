@@ -29,7 +29,7 @@ function matchTanggal(input){
     console.log(input)
     const allPattern = [
         /^(3[0-1]?|[12]\d?|[4-9]) (januari|maret|mei|juli|agustus|oktober|desember) (202[0-2]|20[0-1][0-9]|1[0-9]{3}|[1-9]|[1-9]{1,2}[0-9])/gi,
-        /^(30?|[12]\d?|[4-9]) (februari|april|juni|september|november) (202[0-2]|20[0-1][0-9]|[1-9]|[1-9]{1,2}[0-9])/gi   ,
+        /^(30?|[12]\d?|[4-9]) (februari|april|juni|september|november) (202[0-2]|20[0-1][0-9]|[1-9]|[1-9]{1,2}[0-9])/gi,
         /^(3[0-1]|0[1-9]|1[0-9]|2[0-9]) (januari|maret|mei|juli|agustus|oktober|desember) (202[0-2]|20[0-1][0-9]|1[0-9]{3}|000[1-9]|00[1-9][0-9]|0[1-9]{1,2}[0-9])/gi,
         /^(30|0[1-9]|1[0-9]|2[0-9]) (februari|april|juni|september|november) (202[0-2]|20[0-1][0-9]|1[0-9]{3}|000[1-9]|00[1-9][0-9]|0[1-9]{1,2}[0-9])/gi,
         /^(3[0-1]?|[12]\d?|[4-9]) (1|3|5|7|8|10|12) (202[0-2]|20[0-1][0-9]|1[0-9]{3}|[0-9]{1,3})/gi,
@@ -45,9 +45,25 @@ function matchTanggal(input){
         /^(3[0-1]|0[1-9]|1[0-9]|2[0-9])\/(0[1|3|5|7|8]|10|12)\/(202[0-2]|20[0-1][0-9]|1[0-9]{3}|000[1-9]|00[1-9][0-9]|0[1-9]{1,2}[0-9])/gi,
         /^(30|0[1-9]|1[0-9]|2[0-9])\/(0[2|4|6|9]|11)\/(202[0-2]|20[0-1][0-9]|1[0-9]{3}|000[1-9]|00[1-9][0-9]|0[1-9]{1,2}[0-9])/gi,
 
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|[1-9]|[1-9]{1,2}[0-9]) (januari|maret|mei|juli|agustus|oktober|desember) (3[0-1]?|[12]\d?|[4-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|[1-9]|[1-9]{1,2}[0-9]) (februari|april|juni|september|november) (30?|[12]\d?|[4-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|000[1-9]|00[1-9][0-9]|0[1-9]{1,2}[0-9]) (januari|maret|mei|juli|agustus|oktober|desember) (3[0-1]|0[1-9]|1[0-9]|2[0-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|000[1-9]|00[1-9][0-9]|0[1-9]{1,2}[0-9]) (februari|april|juni|september|november) (30|0[1-9]|1[0-9]|2[0-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|[0-9]{1,3}) (1|3|5|7|8|10|12) (3[0-1]?|[12]\d?|[4-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|[0-9]{1,3}) (2|4|6|9|11) (30?|[12]\d?|[4-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|000[1-9]|00[1-9][0-9]|0[1-9]{1,2}[0-9]) (0[1|3|5|7|8]|10|12) (3[0-1]|0[1-9]|1[0-9]|2[0-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|000[1-9]|00[1-9][0-9]|0[1-9]{1,2}[0-9]) (0[2|4|6|9]|11) (30|0[1-9]|1[0-9]|2[0-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|[0-9]{1,3})-(1|3|5|7|8|10|12)-(3[0-1]?|[12]\d?|[4-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|[0-9]{1,3})-(2|4|6|9|11)-(30?|[12]\d?|[4-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|000[1-9]|00[1-9][0-9]|0[1-9]{1,2}[0-9])-(0[1|3|5|7|8]|10|12)-(3[0-1]|0[1-9]|1[0-9]|2[0-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|000[1-9]|00[1-9][0-9]|0[1-9]{1,2}[0-9])-(0[2|4|6|9]|11)-(30|0[1-9]|1[0-9]|2[0-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|[0-9]{1,3})\/(1|3|5|7|8|10|12)\/(3[0-1]?|[12]\d?|[4-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|[0-9]{1,3})\/(2|4|6|9|11)\/(30?|[12]\d?|[4-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|000[1-9]|00[1-9][0-9]|0[1-9]{1,2}[0-9])\/(0[1|3|5|7|8]|10|12)\/(3[0-1]|0[1-9]|1[0-9]|2[0-9])/gi,
+        /^(202[0-2]|20[0-1][0-9]|1[0-9]{3}|000[1-9]|00[1-9][0-9]|0[1-9]{1,2}[0-9])\/(0[2|4|6|9]|11)\/(30|0[1-9]|1[0-9]|2[0-9])/gi
     ];
 
-    for(let i = 0; i <= 15; i ++){
+    for(let i = 0; i <= 31; i ++){
         if(input.match(allPattern[i]) != null){
             // console.log(i);
             return convertString(input.match(allPattern[i])[0], i);
@@ -82,29 +98,65 @@ function convertString(input, ind){
         ['desember', '12'],
     ])
     // console.log(input);
-    if(ind == 6 || ind == 7){
-        const [d, m, y] = input.split(" ");
+    if(ind == 6 || ind == 7 || ind == 22|| ind == 23){
+        if (ind < 16){
+            const [d, m, y] = input.split(" ");
+            return `${y}-${m}-${d}`;
+        }
+        else {
+            const [y, m, d] = input.split(" ");
+            return `${y}-${m}-${d}`;
+        }
+    }else if(ind == 10 || ind == 11 || ind == 26 || ind == 27){
+        if (ind < 16){
+            const [d,m,y] = input.split("-");
+            return `${y}-${m}-${d}`;
+        }
+        else {
+            const [y,m,d] = input.split("-");
+            return `${y}-${m}-${d}`;
+        }
+    }else if(ind == 14 || ind == 15 || ind == 30 || ind == 31){
+        if (ind < 16){
+            const [d,m,y] = input.split("/");
+            return `${y}-${m}-${d}`;
+        }
+        const [y,m,d] = input.split("/");
         return `${y}-${m}-${d}`;
-    }else if(ind == 10 || ind == 11){
-        const [d,m,y] = input.split("-");
-        return `${y}-${m}-${d}`;
-    }else if(ind == 14 || ind == 15){
-        const [d,m,y] = input.split("/");
-        return `${y}-${m}-${d}`;
-    }else if(ind == 4 || ind == 5 ){
-        const [d, m, y] = input.split(" ");
+    }else if(ind == 4 || ind == 5 || ind == 20 || ind == 21){
+        if (ind < 16) {
+            const [d, m, y] = input.split(" ");
+            return `${padTo4Digits(y)}-${padTo2Digits(m)}-${padTo2Digits(d)}`;
+        }
+        const [y, m, d] = input.split(" ");
         return `${padTo4Digits(y)}-${padTo2Digits(m)}-${padTo2Digits(d)}`;
-    }else if(ind == 8 || ind == 9){
-        const [d,m,y] = input.split("-");
+    }else if(ind == 8 || ind == 9 || ind == 24 || ind == 25){
+        if (ind < 16) {
+            const [d,m,y] = input.split("-");
+            return `${padTo4Digits(y)}-${padTo2Digits(m)}-${padTo2Digits(d)}`;
+        }
+        const [y,m,d] = input.split("-");
         return `${padTo4Digits(y)}-${padTo2Digits(m)}-${padTo2Digits(d)}`;
-    }else if(ind == 12 || ind == 13){
-        const [d,m,y] = input.split("/");
+    }else if(ind == 12 || ind == 13 || ind == 28 || ind == 29){
+        if (ind < 16) {
+            const [d,m,y] = input.split("/");
+            return `${padTo4Digits(y)}-${padTo2Digits(m)}-${padTo2Digits(d)}`;
+        }
+        const [y,m,d] = input.split("/");
         return `${padTo4Digits(y)}-${padTo2Digits(m)}-${padTo2Digits(d)}`;
-    }else if(ind == 0 || ind == 1){
-        const [d, m, y] = input.split(" ");
+    }else if(ind == 0 || ind == 1 || ind == 16 || ind == 17){
+        if (ind < 16) {
+            const [d, m, y] = input.split(" ");
+            return `${padTo4Digits(y)}-${mapping.get(m.toLowerCase())}-${padTo2Digits(d)}`;
+        }
+        const [y, m, d] = input.split(" ");
         return `${padTo4Digits(y)}-${mapping.get(m.toLowerCase())}-${padTo2Digits(d)}`;
-    }else if(ind == 2 || ind == 3){
-        const [d, m, y] = input.split(" ");
+    }else if(ind == 2 || ind == 3 || ind == 18 || ind == 19){
+        if (ind < 16) {
+            const [d, m, y] = input.split(" ");
+            return `${y}-${mapping.get(m.toLowerCase())}-${d}`;
+        }
+        const [y, m, d] = input.split(" ");
         return `${y}-${mapping.get(m.toLowerCase())}-${d}`; 
     }
 }
