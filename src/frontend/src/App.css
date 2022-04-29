@@ -1,9 +1,11 @@
 * {
-  background-color: #282c34;
-  color: white;
-  font-family: 'Courier New', Courier, monospace;
+  background-color: #222831;
+  color: #EEEEEE;
+  font-size: 20px;
+  font-family: monospace;
   text-align: center;
 }
+
 
 .title-page {
   margin: 30px;  
@@ -14,12 +16,34 @@
   font-size: 60px;
 }
 
-
-.form-control {
-  border-width: 0px;
-  border-style: solid;
+.form-horizontal {
+  text-align: center;
   box-sizing: border-box;
-  margin: 10px;
+  margin: 20px 50px;
+  border-radius: 50px;
+  border-color: #61dafb;
+  background-color: #EEEEEE;
+  color: #222831;
+}
+
+.form-group {
+  text-align: justify;
+  position: relative;
+  margin: 10px 15%;
+}
+
+#xxx {
+  text-align: center;
+  position: relative;
+  margin: 10px 30%;
+}
+
+#xx1 {
+  text-align: center;
+}
+
+#xx2 {
+  margin: 10px, 0;
 }
 
 .App {
@@ -50,6 +74,17 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.header {
+  background-color: #61dafb;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 1%;
+  width: 100%;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {

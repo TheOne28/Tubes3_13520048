@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Navbar from "./navbar.component";
 
 export default class CreatePenyakit extends Component {
     constructor(props) {
@@ -45,7 +46,7 @@ export default class CreatePenyakit extends Component {
             dnaString: this.state.selectedFileContent,
         }
         
-        axios.post('http://localhost:3001/penyakit/add', newPenyakit)
+        axios.post('https://backendtubesstimabarokah.herokuapp.com/penyakit/add', newPenyakit)
         .then(res => 
             this.setState({
                 hasil: res.data
@@ -61,22 +62,23 @@ export default class CreatePenyakit extends Component {
     render() {
         return(
             <div>
-                <h3 className="title-page">Tambahkan Penyakit</h3>
+                <Navbar />
+                <h3 className="title-page">Upload New Disease DNA</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
-                        <label>Nama Penyakit:</label>
+                        <label>Disease Name:</label>
                         <input type="text"
                             required
-                            className="form-control"
+                            className="form-horizontal"
                             value={this.state.namapenyakit}
                             onChange={this.onChangeNamaPenyakit}
                             />
                     </div>
                     <div className="form-group">
-                        <label>Sequence DNA:</label>
+                        <label>DNA Sequence:</label>
                         <input type="file" 
                             required
-                            className="form-control"
+                            className="form-horizontal"
                             onChange={this.handleFileChange}/>
                             {/* // value={this.state.selectedFile}/> */}
                     </div>

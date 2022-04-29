@@ -1,26 +1,63 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component, useState, useCallback } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Button = styled.button`
+  padding: 15px 45px;
+  cursor: pointer;
+  opacity: 0.6;
+  background: #222831;
+  color: #EEEEEE;
+  border: 0;
+  outline: 0;
+  ${({ active }) =>
+    active &&
+    `
+    border-bottom: 2px solid #00ADB5;
+    opacity: 1;
+  `}
+`;
+
+function TabGroup() {
+  const Navigate = useNavigate();
+  const [active, setActive] = useState(where[useLocation().pathname]);
+  return (
+    <div>
+      {types.map(type => (
+        <Button
+          key={type}
+          active={active === type}
+          onClick={() => {
+            Navigate('/' + dest[type], {replace: true});
+            setActive(type);}}
+        >
+          {type}
+        </Button>
+      ))}
+    </div>
+  );
+}
+
+const types = ['Home', 'Test', 'Search', 'Upload'];
+const dest = {
+  'Home': '',
+  'Test': 'prediksi',
+  'Search': 'hasil',
+  'Upload': 'penyakit'
+}
+const where = {
+  '/': 'Home',
+  '/prediksi': 'Test',
+  '/hasil': 'Search',
+  '/penyakit': 'Upload'
+}
 
 export default class Navbar extends Component {
-
     render(){
         return (
-            <nav className="navbar navbar-dark navbar-expand-lg">
-              <Link to="/" className="navbar-brand">StimaBarokah</Link>
-              <div className="collpase navbar-collapse">
-              <ul className="navbar-nav mr-auto">
-                <li className="navbar-item">
-                <Link to="/penyakit" className="nav-link">Create Penyakit</Link>
-                </li>
-                <li className="navbar-item">
-                <Link to="/prediksi" className="nav-link">Tes DNA</Link>
-                </li>
-                <li className="navbar-item">
-                <Link to="/hasil" className="nav-link">Check Data Tes</Link>
-                </li>
-              </ul>
-              </div>
-            </nav>
+            <div className='header'>
+                <TabGroup />
+            </div>
           );
     }
 }

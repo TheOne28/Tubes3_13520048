@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Navbar from "./navbar.component";
 
 export default class TesDNA extends Component {
     constructor(props) {
@@ -92,7 +93,7 @@ export default class TesDNA extends Component {
             selectedAlgo: this.state.pilihantes
         }
 
-        axios.post('http://localhost:3001/prediksi/add', newTesDNA)
+        axios.post('https://backendtubesstimabarokah.herokuapp.com/prediksi/add', newTesDNA)
         .then(res => {
             if(typeof res.data == "string"){
                 this.setState({
@@ -123,38 +124,39 @@ export default class TesDNA extends Component {
     render() {
         return(
             <div>
-                <h3 className="title-page">Tes DNA</h3>
+                <Navbar />
+                <h3 className="title-page">Check Your DNA for Disease</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
-                        <label>Nama Pengguna:</label>
+                        <label>Your Name:</label>
                         <input type="text"
                             required
-                            className="form-control"
+                            className="form-horizontal"
                             value={this.state.username}
                             onChange={this.onChangeUserName}
                             />
                     </div>
                     <div className="form-group">
-                        <label>Sequence DNA:</label>
+                        <label>Your DNA Sequence:</label>
                         <input type="file" 
                             required
-                            className="form-control"
+                            className="form-horizontal"
                             onChange={this.handleFileChange}/>
                     </div>
                     <div className="form-group">
-                        <label>Prediksi Penyakit:</label>
+                        <label>Disease Name:</label>
                         <input type="text"
                             required
-                            className="form-control"
+                            className="form-horizontal"
                             value={this.state.prediksipenyakit}
                             onChange={this.onChangePrediksiPenyakit}
                             />
                     </div>
                     <div className="form-group">
-                        <label>Pilihan Jenis Tes:</label>
+                        <label>Searching Algorithm:</label>
                         <select ref={this.userInput}
                             required
-                            className="form-control"
+                            className="form-horizontal"
                             value={this.state.pilihantes}
                             onChange={this.onChangePilihanTes}>
                             {

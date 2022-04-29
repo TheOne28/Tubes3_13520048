@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Navbar from "./navbar.component";
 
 const HasilPrediksi = props => (
     <tr>
@@ -38,18 +39,18 @@ export default class CheckDataTes extends Component {
             sudahdicari: 0
         })
 
-        this.setState({
-            hasil: []
-        })
-
         const newCheckQuery = {
             query: this.state.checkquery
         }
 
         console.log(newCheckQuery);
 
+        this.setState({
+            hasil: []
+        })
+
         var encodedQuery = encodeURIComponent(this.state.checkquery);
-        axios.get('http://localhost:3001/hasil/' + encodedQuery)
+        axios.get('https://backendtubesstimabarokah.herokuapp.com/hasil/' + encodedQuery)
         .then(res => {
             if(typeof res.data != 'string'){
                 this.setState({
@@ -73,20 +74,21 @@ export default class CheckDataTes extends Component {
     render() {
         return(
             <div>
+            <Navbar />
             <div>
-                <h3 className="title-page">Cek Data Tes</h3>
+                <h3 className="title-page">Search for Tests</h3>
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>Masukkan Tanggal dan/atau Nama Penyakit:</label>
+                    <div className="form-group" id="xxx">
+                        <label>Enter a date and/or disease name:</label>
                         <input type="text"
                             required
-                            className="form-control"
+                            className="form-horizontal"
                             value={this.state.checkquery}
                             onChange={this.onChangeNamaCheckQuery}
                             />
                     </div>
                     <br/>
-                    <div className="form-group">
+                    <div className="form-group" id="xx1">
                         <input type="submit" value="Submit" className="btn btn-primary"/>
                     </div>
                 </form>
