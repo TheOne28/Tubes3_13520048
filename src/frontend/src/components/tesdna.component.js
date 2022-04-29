@@ -78,6 +78,10 @@ export default class TesDNA extends Component {
         e.preventDefault();
 
         this.setState({
+            sudahdicari: 0
+        })
+
+        this.setState({
             pesan_gagal: ''
         })
 
@@ -87,10 +91,6 @@ export default class TesDNA extends Component {
             penyakitPrediksi: this.state.prediksipenyakit,
             selectedAlgo: this.state.pilihantes
         }
-
-        this.setState({
-            sudahdicari: 1
-        })
 
         axios.post('http://localhost:3001/prediksi/add', newTesDNA)
         .then(res => {
@@ -108,6 +108,11 @@ export default class TesDNA extends Component {
                 })
             }
         });
+
+        this.setState({
+            sudahdicari: 1
+        })
+        
         console.log(this.state.hasil_similarity);
         console.log(newTesDNA);
 
@@ -118,7 +123,7 @@ export default class TesDNA extends Component {
     render() {
         return(
             <div>
-                <h3>Tes DNA</h3>
+                <h3 className="title-page">Tes DNA</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Nama Pengguna:</label>

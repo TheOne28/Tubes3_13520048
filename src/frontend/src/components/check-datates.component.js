@@ -74,7 +74,7 @@ export default class CheckDataTes extends Component {
         return(
             <div>
             <div>
-                <h3>Cek Data Tes</h3>
+                <h3 className="title-page">Cek Data Tes</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Masukkan Tanggal dan/atau Nama Penyakit:</label>

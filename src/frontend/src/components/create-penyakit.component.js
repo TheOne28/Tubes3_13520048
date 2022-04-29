@@ -61,7 +61,7 @@ export default class CreatePenyakit extends Component {
     render() {
         return(
             <div>
-                <h3>Tambahkan Penyakit</h3>
+                <h3 className="title-page">Tambahkan Penyakit</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Nama Penyakit:</label>

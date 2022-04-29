@@ -1,3 +1,27 @@
+* {
+  background-color: #282c34;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+}
+
+.title-page {
+  margin: 30px;  
+}
+
+.title-homepage {
+  margin: 60px;
+  font-size: 60px;
+}
+
+
+.form-control {
+  border-width: 0px;
+  border-style: solid;
+  box-sizing: border-box;
+  margin: 10px;
+}
+
 .App {
   text-align: center;
 }
