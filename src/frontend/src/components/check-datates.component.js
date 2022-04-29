@@ -50,7 +50,7 @@ export default class CheckDataTes extends Component {
         })
 
         var encodedQuery = encodeURIComponent(this.state.checkquery);
-        axios.get('https://backendtubesstimabarokah.herokuapp.com/hasil/' + encodedQuery)
+        axios.get('http://localhost:3001/hasil/' + encodedQuery)
         .then(res => {
             if(typeof res.data != 'string'){
                 this.setState({

@@ -93,7 +93,7 @@ export default class TesDNA extends Component {
             selectedAlgo: this.state.pilihantes
         }
 
-        axios.post('https://backendtubesstimabarokah.herokuapp.com/prediksi/add', newTesDNA)
+        axios.post('http://localhost:3001/prediksi/add', newTesDNA)
         .then(res => {
             if(typeof res.data == "string"){
                 this.setState({

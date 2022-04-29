@@ -46,7 +46,7 @@ export default class CreatePenyakit extends Component {
             dnaString: this.state.selectedFileContent,
         }
         
-        axios.post('https://backendtubesstimabarokah.herokuapp.com/penyakit/add', newPenyakit)
+        axios.post('http://localhost:3001/penyakit/add', newPenyakit)
         .then(res => 
             this.setState({
                 hasil: res.data
